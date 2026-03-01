@@ -7,5 +7,5 @@ class BasePageHelpers:
         return ''.join(random.choices(string.ascii_lowercase, k=length))
 
 class RecipesCreatePageHelpers:
-    def ingredient_option_by_name(self: str): # Динамический локатор для выбора ингедиента из списка
-        return By.XPATH, f"//div[contains(@class,'styles_container')]//div[normalize-space()='{self}']"
+    def ingredient_option_by_name(name: str): # Динамический локатор для выбора ингедиента из списка
+        return By.XPATH, f"//div[contains(@class,'styles_container')]//div[normalize-space()='{name}']"
