@@ -1,0 +1,21 @@
+services:
+  selenoid:
+    image: aerokube/selenoid:latest
+    network_mode: bridge
+    volumes:
+      - ./config/browsers.json:/etc/selenoid/browsers.json
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "4444:4444"
+
+  tests:
+    build: .
+    container_name: ui-tests
+    depends_on:
+      - selenoid
+    environment:
+      SELENOID_URI: "http://selenoid:4444/wd/hub"
+    volumes:
+      - .:/app
+    command: >
+      python -m pytest test --alluredir=allure_results
