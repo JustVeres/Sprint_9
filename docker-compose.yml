@@ -1,7 +1,7 @@
 services:
 
   selenoid:
-    image: "aerokube/selenoid:1.12.1"
+    image: "aerokube/selenoid:latest"
     container_name: selenoid
     ports:
       - "4444:4444"
@@ -13,7 +13,7 @@ services:
     command: ["-conf", "/etc/selenoid/browsers.json", "-container-network", "selenoid"]
 
   selenoid-ui:
-    image: "aerokube/selenoid-ui:1.13.0"
+    image: "aerokube/selenoid-ui:latest"
     container_name: selenoid-ui
     ports:
       - "8081:8080"
