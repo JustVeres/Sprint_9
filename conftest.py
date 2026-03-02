@@ -1,4 +1,5 @@
 import pytest
+import os
 from selenium import webdriver
 from selenium.webdriver import Options
 from helpers import BasePageHelpers
@@ -10,20 +11,22 @@ from pages.recipes_create_page import RecipesCreatePage
 
 @pytest.fixture
 def driver():
+    selenoid_url = os.getenv(
+        "SELENOID_URI",
+        "http://selenoid:4444/wd/hub"
+    )
 
     options = Options()
     options.set_capability("browserName", "chrome")
     options.set_capability("browserVersion", "128.0")
-    options.set_capability('acceptInsecureCerts', True)
     options.set_capability(
         "selenoid:options",
         {
+            "enableVNC": True,
             "enableVideo": False
         }
     )
-    driver = webdriver.Remote(
-        command_executor="http://selenoid:4444/wd/hub",
-        options=options)
+    driver = webdriver.Remote(command_executor=selenoid_url, options=options)
     driver.maximize_window()
     yield driver
     driver.quit()
