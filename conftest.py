@@ -1,7 +1,7 @@
 import pytest
 import os
 from selenium import webdriver
-from selenium.webdriver import Options
+from selenium.webdriver.chrome.options import Options
 from helpers import BasePageHelpers
 from pages.base_page import BasePage
 from pages.signup_page import SignupPage
