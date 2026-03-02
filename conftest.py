@@ -9,6 +9,9 @@ from pages.signin_page import SigninPage
 from pages.recipes_page import RecipesPage
 from pages.recipes_create_page import RecipesCreatePage
 
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 @pytest.fixture
 def driver():
     selenoid_url = os.getenv(
@@ -28,6 +31,15 @@ def driver():
     )
     driver = webdriver.Remote(command_executor=selenoid_url, options=options)
     driver.maximize_window()
+    yield driver
+    driver.quit()
+
+@pytest.fixture
+def driver3():
+    chrome_options = Options()
+    chrome_options.add_argument("--start-maximized")
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
     driver.quit()
 

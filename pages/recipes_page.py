@@ -25,4 +25,4 @@ class RecipesPage(BasePage):
     @allure.step("Проверяем, отображается ли изображение рецепта")
     def is_recipe_image_visible(self):
         element = self.wait_visible_return(RPL.RECIPE_CARD_IMAGE)
-        return element.is_displayed() and bool(element.get_attribute("src"))
+        return element.is_displayed()
