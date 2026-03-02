@@ -30,8 +30,6 @@ services:
       - selenoid
     tty: true
     working_dir: /app
-    volumes:
-      - .:/app
     command: ["pytest", "--alluredir=/app/allure-results"]
 
 networks:
